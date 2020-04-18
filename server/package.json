@@ -1,0 +1,11 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/dsomel21/kitchen-inventory",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "knex": "^0.20.15"
+  }
+}
