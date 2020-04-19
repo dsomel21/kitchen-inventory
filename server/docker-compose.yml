@@ -5,8 +5,6 @@ services:
   db:
     image: postgres
     restart: always
-    volumes: 
-        - ./docker-data/db-data:/var/lib/postgres/data
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
