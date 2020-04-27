@@ -6,8 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "migrate": "npx knex migration:latest",
-    "rollback": "npx knex migration:rollback"
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
