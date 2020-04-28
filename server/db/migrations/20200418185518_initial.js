@@ -6,7 +6,7 @@ const addDefaultColumns = (t) => {
   t.datetime('deleted_at');
 };
 
-const createNameTable = (tableName) => {
+const createNameTable = (knex, tableName) => {
   return knex.schema.createTable(tableName, (t) => {
     t.increments().notNullable();
     t.string('name').notNullable();
@@ -27,20 +27,33 @@ exports.up = async (knex) => {
     addDefaultColumns(t);
   });
   // ItemType
-  await createNameTable('item_types');
+  await createNameTable(knex, 'item_types');
 
   // Country
-  await createNameTable('countries');
+  await createNameTable(knex, 'countries');
 
   // State
-  await createNameTable('states');
+  await createNameTable(knex, 'states');
 
   // Shape
-  await createNameTable('shapes');
+  await createNameTable(knex, 'shapes');
 
   // Location
+  await knex.schema.createTable('locations', (t) => {
+    t.increments();
+    t.string('name').notNullable();
+    t.string('description, 1000');
+    t.string('image_url, 1000');
+
+    addDefaultColumns(t);
+  });
 };
 
 exports.down = async (knex) => {
   await knex.schema.dropTable('users');
+  await knex.schema.dropTable('item_types');
+  await knex.schema.dropTable('countries');
+  await knex.schema.dropTable('states');
+  await knex.schema.dropTable('shapes');
+  await knex.schema.dropTable('locations');
 };
