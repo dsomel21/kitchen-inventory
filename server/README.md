@@ -24,9 +24,9 @@ Create the following tables via Knex migrations.
 * [✔] Country
 
 ### Seed the Database
-* [] User
-* [] Country
-* [] States ( & Provinces)
+* [X] User
+* [X] Country
+* [X] States ( & Provinces)
 
 ### Stretch Goal for May 15
 * [] Build API
