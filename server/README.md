@@ -1,15 +1,15 @@
-# Kitchen Inventory - Backend 
+# Kitchen Inventory - Backend
 
 ## TODO:
 
 ### Basic Setup
-* [✔] Setup `package.json` 
+* [✔] Setup `package.json`
 * [✔] Install necessary tools for Express, PostGres and Knex
 * [✔] Connect to Database
 
 ### Setup Entities in an Inventory System
 
-Create the following tables via Knex migrations. 
+Create the following tables via Knex migrations.
 
 * [✔] User
 * [ ] Item
@@ -26,12 +26,12 @@ Create the following tables via Knex migrations.
 ### Seed the Database
 * [] User
 * [] Country
-* [] State
+* [] States ( & Provinces)
 
 ### Stretch Goal for May 15
-* [] Build API 
+* [] Build API
 
 ### Super Stretch Goals:
-* [] Build GraphQL Schema 
-* [] GraphQL APIify it 
+* [] Build GraphQL Schema
+* [] GraphQL APIify it
 
