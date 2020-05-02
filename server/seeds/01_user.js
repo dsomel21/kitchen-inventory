@@ -16,7 +16,7 @@ exports.seed = async (knex) => {
       id: 1,
       email: 'dsomel21@gmail.com',
       name: 'Rage',
-      password: genetrateRandomPasswordHash(),
+      password: generateRandomPasswordHash(),
     },
   ]);
 };
