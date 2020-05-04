@@ -25,17 +25,9 @@ exports.up = async (knex) => {
     t.increments().notNullable();
     createOnlyNameColumnOnTable(t);
   });
-
-  // Item
-  knex.schema.createTable('items', (t) => {
-    t.increments().notNullable();
-
-    addDefaultColumns(t);
-  });
 };
 
 exports.down = async (knex) => {
   await knex.schema.dropTable('sizes');
   await knex.schema.dropTable('shapes');
-  await knex.schema.dropTable('items');
 };
