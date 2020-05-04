@@ -1,19 +1,9 @@
 const Knex = require('knex');
 
-const addDefaultColumns = (t) => {
-  // timestamps([useTimestamps], [defaultToNow])
-  t.timestamps(false, true);
-  t.datetime('deleted_at');
-};
-
-const createNameTable = (knex, tableName) => {
-  return knex.schema.createTable(tableName, (t) => {
-    t.increments().notNullable();
-    t.string('name').notNullable();
-
-    addDefaultColumns(t);
-  });
-};
+const {
+  addDefaultColumns,
+  createOnlyNameColumnOnTable,
+} = require('../../src/lib/tableUtils.js');
 
 exports.up = async (knex) => {
   // User
@@ -27,16 +17,16 @@ exports.up = async (knex) => {
     addDefaultColumns(t);
   });
   // ItemType
-  await createNameTable(knex, 'item_types');
+  await createOnlyNameColumnOnTable(knex, 'item_types');
 
   // Country
-  await createNameTable(knex, 'countries');
+  await createOnlyNameColumnOnTable(knex, 'countries');
 
   // State
-  await createNameTable(knex, 'states');
+  await createOnlyNameColumnOnTable(knex, 'states');
 
   // Shape
-  await createNameTable(knex, 'shapes');
+  await createOnlyNameColumnOnTable(knex, 'shapes');
 
   // Location
   await knex.schema.createTable('locations', (t) => {

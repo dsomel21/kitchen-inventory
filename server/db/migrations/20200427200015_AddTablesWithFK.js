@@ -1,8 +1,4 @@
-const addDefaultColumns = (t) => {
-  // timestamps([useTimestamps], [defaultToNow])
-  t.timestamps(false, true);
-  t.datetime('deleted_at');
-};
+const { addDefaultColumns } = require('../../src/lib/tableUtils.js');
 
 exports.up = async (knex) => {
   // Address
