@@ -6,44 +6,55 @@ const {
 } = require('../../src/lib/tableUtils.js');
 
 exports.up = async (knex) => {
-  // User
-  await knex.schema.createTable('users', (t) => {
-    t.increments().notNullable();
-    t.string('email', 254).notNullable().unique();
-    t.string('name').notNullable();
-    t.string('password', 127).notNullable();
-    t.datetime('last_login');
+  await Promise.all([
+    // User
+    knex.schema.createTable('users', (t) => {
+      t.increments().notNullable();
+      t.string('email', 254).notNullable().unique();
+      t.string('name').notNullable();
+      t.string('password', 127).notNullable();
+      t.datetime('last_login');
 
-    addDefaultColumns(t);
-  });
-  // ItemType
-  await createOnlyNameColumnOnTable(knex, 'item_types');
+      addDefaultColumns(t);
+    }),
 
-  // Country
-  await createOnlyNameColumnOnTable(knex, 'countries');
+    // ItemType
+    createOnlyNameColumnOnTable(knex, 'item_types'),
 
-  // State
-  await createOnlyNameColumnOnTable(knex, 'states');
+    // Country
+    knex.schema.createTable('countries', (t) => {
+      t.increments().notNullable();
+      t.string('name').notNullable();
+      t.string('code');
 
-  // Shape
-  await createOnlyNameColumnOnTable(knex, 'shapes');
+      addDefaultColumns(t);
+    }),
 
-  // Location
-  await knex.schema.createTable('locations', (t) => {
-    t.increments();
-    t.string('name').notNullable();
-    t.string('description, 1000');
-    t.string('image_url, 1000');
+    // State
+    createOnlyNameColumnOnTable(knex, 'states'),
 
-    addDefaultColumns(t);
-  });
+    // Shape
+    createOnlyNameColumnOnTable(knex, 'shapes'),
+
+    // Location
+    knex.schema.createTable('locations', (t) => {
+      t.increments();
+      t.string('name').notNullable();
+      t.string('description, 1000');
+      t.string('image_url, 1000');
+
+      addDefaultColumns(t);
+    }),
+  ]);
 };
 
 exports.down = async (knex) => {
-  await knex.schema.dropTable('users');
-  await knex.schema.dropTable('item_types');
-  await knex.schema.dropTable('countries');
-  await knex.schema.dropTable('states');
-  await knex.schema.dropTable('shapes');
-  await knex.schema.dropTable('locations');
+  await Promise.all([
+    knex.schema.dropTableIfExists('users'),
+    knex.schema.dropTableIfExists('item_types'),
+    knex.schema.dropTableIfExists('countries'),
+    knex.schema.dropTableIfExists('states'),
+    knex.schema.dropTableIfExists('shapes'),
+    knex.schema.dropTableIfExists('locations'),
+  ]);
 };
