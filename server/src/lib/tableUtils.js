@@ -1,3 +1,5 @@
+const pluralize = require('pluralize');
+
 const addDefaultColumns = async (t) => {
   // timestamps([useTimestamps], [defaultToNow])
   t.timestamps(false, true);
@@ -13,4 +15,14 @@ const createOnlyNameColumnOnTable = (knex, tableName) => {
   });
 };
 
-module.exports = { addDefaultColumns, createOnlyNameColumnOnTable };
+// references(t, item_types)
+const references = async (t, tableName) => {
+  const singularTableName = pluralize.singular(tableName);
+
+  t.integer(`${singularTableName}_id`)
+    .unsigned()
+    .references(`${tableName}.id`)
+    .onDelete('CASCADE');
+};
+
+module.exports = { addDefaultColumns, createOnlyNameColumnOnTable, references };

@@ -31,6 +31,7 @@ exports.up = async (knex) => {
 
     // Manufacturer
     knex.schema.createTable('manufacturers', (t) => {
+      t.increments().notNullable();
       t.string('name').notNullable();
       t.string('logo_url', 2000);
       t.string('description', 1000);

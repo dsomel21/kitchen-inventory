@@ -40,8 +40,8 @@ exports.up = async (knex) => {
     knex.schema.createTable('locations', (t) => {
       t.increments();
       t.string('name').notNullable();
-      t.string('description, 1000');
-      t.string('image_url, 1000');
+      t.string('description', 1000);
+      t.string('image_url', 1000);
 
       addDefaultColumns(t);
     }),
